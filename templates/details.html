@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="//cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css">
+    <script src="//cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Stock Market</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <h3 style="border: 1px solid black;background-color: aqua;padding: 3px;">Stock Market</h3>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <label style="margin-left: 20px;margin-top: 17px;">
+                        <h3>{{ details.user_first_name }}</h3>
+                    </label>
+                </li>
+                <li class="nav-item active">
+                    <label style="margin-left: 5px;margin-top: 17px;">
+                        <h3>{{ details.user_last_name }}</h3>
+                    </label>
+                </li>
+                <li class="nav-item active">
+                    <label style="margin-left: 20px;margin-top: 17px;">
+                        <h3>{{ details.mobile }}</h3>
+                    </label>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/details" style="margin-left: 20px;">
+                        <h3>Account Details</h3>
+                    </a>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0" action="/search_save" method="POST">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"
+                    id="search_items" name="search_items">
+                <button type="submit"><i class='fas fa-plus-circle' style='font-size:48px;color:red'></i></button>
+            </form>
+        </div>
+    </nav>
+    <div>
+        <table class="table table-striped" id='table_id'>
+            <thead>
+              <tr>
+                <th scope="col">Company Code</th>
+                <th scope="col">Company Name</th>
+                <th scope="col">sell quntity</th>
+                <th scope="col">Buy Price</th>
+                <th scope="col">Sell Price</th>
+                <th scope="col">Total sell Price</th>
+                <th scope="col">Buy Date</th>
+                <th scope="col">Sell Date</th>
+                <th scope="col">Total Profit</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for i in data %}
+                <tr>
+                    <td>{{ i.company_code }}</td>
+                    <td>{{ i.company_name }}</td>
+                    <td>{{ i.sell_quntity }}</td>
+                    <td>{{ i.buy_price }}</td>
+                    <td>{{ i.sell_price }}</td>
+                    <td>{{ i.total_sell_price }}</td>
+                    <td>{{ i.buy_date }}</td>
+                    <td>{{ i.sell_date }}</td>
+                    <td>{{ i.total_profit }}</td>
+                </tr>
+                  
+                {% endfor %}
+            </tbody>
+          </table>
+    </div>
+    <script>
+    $(document).ready( function () {
+        $('#table_id').DataTable();
+    } );
+</script>
+<link rel="stylesheet" href="//cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css">
+<script src="//cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+
+</body>

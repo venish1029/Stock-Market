@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+    integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+    integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+    crossorigin="anonymous"></script>
+  <title>Stock Market</title>
+  <style>
+    
+
+    * {
+      box-sizing: border-box;
+    }
+
+    .column {
+      float: left;
+      width: 50%;
+      padding: 10px;
+      height: 720px;
+      /* Should be removed. Only for demonstration */
+    }
+
+    .row:after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+
+
+
+    table {
+      width: inherit;
+    }
+
+
+    @media screen and (max-width: 600px) {
+      .column {
+        width: 100%;
+      }
+    }
+
+    .tri-color-line {
+      height: 10px;
+      background: #ac2341;
+      background: -moz-linear-gradient(left, #ac2341 0%, #ac2341 30%, #e55d28 30%, #e55d28 60%, #bfd52c 60%, #bfd52c 100%);
+      background: -webkit-gradient(linear, left top, right top, color-stop(0%, #ac2341), color-stop(30%, #ac2341), color-stop(30%, #e55d28), color-stop(60%, #e55d28), color-stop(60%, #bfd52c), color-stop(100%, #bfd52c));
+      background: -webkit-linear-gradient(left, #ac2341 0%, #ac2341 30%, #e55d28 30%, #e55d28 60%, #bfd52c 60%, #bfd52c 100%);
+      background: -o-linear-gradient(left, #ac2341 0%, #ac2341 30%, #e55d28 30%, #e55d28 60%, #bfd52c 60%, #bfd52c 100%);
+      background: -ms-linear-gradient(left, #ac2341 0%, #ac2341 30%, #e55d28 30%, #e55d28 60%, #bfd52c 60%, #bfd52c 100%);
+      background: linear-gradient(to right, #ac2341 0%, #ac2341 30%, #e55d28 30%, #e55d28 60%, #bfd52c 60%, #bfd52c 100%);
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <h3 style="border: 1px solid black;background-color: aqua;padding: 3px;">Stock Market</h3>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/user_login">Login</a>
+        </li>
+        
+      </ul>
+      <form class="form-inline my-2 my-lg-0" action="/" method="POST">
+        <input class="form-control mr-sm-2" placeholder="Search By code" aria-label="Search" id="search_items"
+          name="search_items">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit" id='search_button'>Search</button>
+      </form>
+    </div>
+  </nav>
+  <div class="row">
+    <div class="column" style="background-color:#aaa;">
+      <h2>Top Gronner Company</h2>
+
+      <table class="table table-dark">
+        <thead>
+          <tr>
+            <th scope="col">securityID</th>
+            <th scope="col">scripCode</th>
+            <th scope="col">LTP</th>
+            <th scope="col">change</th>
+            <th scope="col">pChange</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for i in data_gainer_company %}
+          <tr>
+            <td>{{i.securityID}}</td>
+            <td>{{i.scripCode}}</td>
+            <td>{{i.LTP}}</td>
+            <td>{{i.change}}</td>
+            <td>{{i.pChange}}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <h2>Top Looser Company</h2>
+
+      <table class="table table-dark">
+        <thead>
+          <tr>
+            <th scope="col">securityID</th>
+            <th scope="col">scripCode</th>
+            <th scope="col">LTP</th>
+            <th scope="col">change</th>
+            <th scope="col">pChange</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for i in data_looser_company %}
+          <tr>
+            <td>{{i.securityID}}</td>
+            <td>{{i.scripCode}}</td>
+            <td>{{i.LTP}}</td>
+            <td>{{i.change}}</td>
+            <td>{{i.pChange}}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+
+    </div>
+
+
+    <div class="column" style="background-color:#bbb; overflow:scroll;">
+      {% if main_page %}
+      {% for i in company %}
+      <h3>{{ i.companyName }}</h3>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Current Prize</th>
+            <th>Current Change</th>
+            <th>Percentage Change</th>
+            <th>DayHigh</th>
+            <th>DayLow</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="table-success">
+            <td>{{ i.currentValue }}</td>
+            <td>{{ i.change }}</td>
+            <td>{{ i.pChange }}</td>
+            <td>{{ i.dayHigh }}</td>
+            <td>{{ i.dayLow }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="tri-color-line"></div>
+      {% endfor %}
+      {% endif %}
+      {% if search_items %}
+      <h2 style="color: honeydew;">{{ search_data.companyName }}</h2>
+      <hr>
+      <span style="margin-top:30px;"><strong style="font-size: 36px;margin-left: 3px;">{{ search_data.currentValue }}</strong><strong> </strong>
+        <strong style="font-size: 26px;margin-left: 3px;">{{ search_data.change }}</strong><strong
+          style="font-size: 20px;margin-left: 3px;">{{ search_data.pChange }}</strong>%</span>
+
+        <table style="width: 100%;margin-bottom: 30px;">
+          <tbody style="border-collapse: collapse; border: 1px solid black;background-color: white;">
+            <tr>
+              <td>Previous Close</td>
+              <td style="text-align: right;">{{ search_data.previousClose }}</td>
+            </tr>
+            <tr>
+              <td height="1px" colspan="2" bgcolor="#aeaeae"></td>
+            </tr>
+            <tr>
+              <td>Previous Open</td>
+              <td style="text-align: right;">{{ search_data.previousOpen }}</td>
+            </tr>
+            <tr>
+              <td height="1px" colspan="2" bgcolor="#aeaeae"></td>
+            </tr>
+            <tr>
+              <td>VWAP</td>
+              <td style="text-align: right;">{{ search_data.weightedAvgPrice }}</td>
+            </tr>
+          </tbody>
+        </table>
+
+      <table style="width: 100%;margin-bottom: 30px;">
+        <tbody style="border-collapse: collapse; border: 1px solid black;background-color: white;">
+          <tr>
+            <td>DayHigh</td>
+            <td style="text-align: right;">{{ search_data.dayHigh }}</td>
+          </tr>
+          <tr>
+            <td height="1px" colspan="2" bgcolor="#aeaeae"></td>
+          </tr>
+          <tr>
+            <td>DayLow</td>
+            <td style="text-align: right;">{{ search_data.dayLow }}</td>
+          </tr>
+          <tr>
+            <td height="1px" colspan="2" bgcolor="#aeaeae"></td>
+          </tr>
+          <tr>
+            <td>52week High</td>
+            <td style="text-align: right;">{{ search_data.52weekHigh }}</td>
+          </tr>
+          <tr>
+            <td height="1px" colspan="2" bgcolor="#aeaeae"></td>
+          </tr>
+          <tr>
+            <td>52week Low</td>
+            <td style="text-align: right;">{{ search_data.52weekLow }}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <table style="width: 100%;margin-bottom: 30px;">
+        <tbody style="border-collapse: collapse; border: 1px solid black;background-color: white;">
+          <tr>
+            <td>industry</td>
+            <td style="text-align: right;">{{ search_data.industry }}</td>
+          </tr>
+          <tr>
+            <td height="1px" colspan="2" bgcolor="#aeaeae"></td>
+          </tr>
+          <tr>
+            <td>securityID</td>
+            <td style="text-align: right;">{{ search_data.securityID }}</td>
+          </tr>
+          <tr>
+            <td height="1px" colspan="2" bgcolor="#aeaeae"></td>
+          </tr>
+          <tr>
+            <td>scripCode</td>
+            <td style="text-align: right;">{{ search_data.scripCode }}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <table style="width: 100%;margin-bottom: 30px;">
+        <tbody style="border-collapse: collapse; border: 1px solid black;background-color: white;">
+          <tr>
+            <td>TotalTradedValue</td>
+            <td style="text-align: right;">{{ search_data.totalTradedValue }}</td>
+          </tr>
+          <tr>
+            <td height="1px" colspan="2" bgcolor="#aeaeae"></td>
+          </tr>
+          <tr>
+            <td>TotalTradedQuantity</td>
+            <td style="text-align: right;">{{ search_data.totalTradedQuantity }}</td>
+          </tr>
+          <tr>
+            <td height="1px" colspan="2" bgcolor="#aeaeae"></td>
+          </tr>
+          <tr>
+            <td>MarketCapFull</td>
+            <td style="text-align: right;">{{ search_data.marketCapFull }}</td>
+          </tr>
+          <tr>
+            <td height="1px" colspan="2" bgcolor="#aeaeae"></td>
+          </tr>
+          <tr>
+            <td>MarketCapFreeFloat</td>
+            <td style="text-align: right;">{{ search_data.marketCapFreeFloat }}</td>
+          </tr>
+          <tr>
+            <td height="1px" colspan="2" bgcolor="#aeaeae"></td>
+          </tr>
+          <tr>
+            <td>LAst Update</td>
+            <td style="text-align: right;">{{ search_data.updatedOn }}</td>
+          </tr>
+        </tbody>
+      </table>
+      {% endif %}
+    </div>
+  </div>
+
+</body>

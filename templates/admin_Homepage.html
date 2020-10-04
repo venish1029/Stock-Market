@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <title>Stock Market</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    .column {
+      float: left;
+      width: 50%;
+      padding: 10px;
+      height: 650px;
+      overflow: scroll;
+      /* Should be removed. Only for demonstration */
+    }
+
+    .row:after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+
+
+
+    table {
+      width: inherit;
+    }
+
+
+    @media screen and (max-width: 600px) {
+      .column {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <h3 style="border: 1px solid black;background-color: aqua;padding: 3px;">Stock Market</h3>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <label style="margin-left: 20px;margin-top: 17px;">
+            <h3>{{ details.user_first_name }}</h3>
+          </label>
+        </li>
+        <li class="nav-item active">
+          <label style="margin-left: 5px;margin-top: 17px;">
+            <h3>{{ details.user_last_name }}</h3>
+          </label>
+        </li>
+        <li class="nav-item active">
+          <label style="margin-left: 20px;margin-top: 17px;">
+            <h3>{{ details.mobile }}</h3>
+          </label>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/details" style="margin-left: 20px;">
+            <h3>Account Details</h3>
+          </a>
+        </li>
+      </ul>
+      <form class="form-inline my-2 my-lg-0" action="/search_save" method="POST">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="search_items"
+          name="search_items">
+        <button type="submit"><i class='fas fa-plus-circle' style='font-size:48px;color:red'></i></button>
+      </form>
+    </div>
+  </nav>
+
+  <div class="row">
+    <div class="column" style="background-color:#aaa;" style="margin-left: 23px;overflow:scroll;">
+      <h4 style="text-align: right;">{{profit}}</h4>
+      {% for i,j in data.items %}
+
+      <div>
+        <h4 style="text-align: center;margin-top: 20px;">{{ i }}</h4>
+        <table style="width: 100%">
+          <tbody style="border-collapse: collapse; border: 1px solid black;background-color: white;">
+            <tr>
+              <td>Company Code</td>
+              <td style="text-align: right;">{{ j.0 }}</td>
+            </tr>
+            <tr>
+              <td height="1px" colspan="2" bgcolor="#aeaeae"></td>
+            </tr>
+            <tr>
+              <td>Comapny Name</td>
+              <td style="text-align: right;">{{ j.1 }}</td>
+            </tr>
+            <tr>
+              <td height="1px" colspan="2" bgcolor="#aeaeae"></td>
+            </tr>
+            <tr>
+              <td>Total Quantity</td>
+              <td style="text-align: right;">{{ j.2 }}</td>
+            </tr>
+          </tbody>
+        </table>
+        <button type="button" class="btn btn-success float-right"
+          onclick='location.href="/search_data/{{i}}"'>Details</button>
+      </div>
+
+      {% endfor %}
+    </div>
+
+    <div class="column" style="background-color:aqua;" style="margin-left: 23px;overflow: scroll;">
+      {% for i in data_owner %}
+      <div>
+        <table style="width: 100%">
+          <tbody style="border-collapse: collapse; border: 1px solid black;background-color: white;">
+            <tr>
+              <td>Date</td>
+              <td style="text-align: right;">{{ i.date }}</td>
+            </tr>
+            <tr>
+              <td height="1px" colspan="2" bgcolor="#aeaeae"></td>
+            </tr>
+            <tr>
+              <td>Company Name</td>
+              <td style="text-align: right;">{{ i.company_name }}</td>
+            </tr>
+            <tr>
+              <td height="1px" colspan="2" bgcolor="#aeaeae"></td>
+            </tr>
+            <tr>
+              <td>Company Code</td>
+              <td style="text-align: right;">{{ i.company_code }}</td>
+            </tr>
+            <tr>
+              <td height="1px" colspan="2" bgcolor="#aeaeae"></td>
+            </tr>
+            <tr>
+              <td>Total Quantity</td>
+              <td style="text-align: right;">{{ i.share_quntity }}</td>
+            </tr>
+            <tr>
+              <td height="1px" colspan="2" bgcolor="#aeaeae"></td>
+            </tr>
+            <tr>
+              <td>Sahre Price</td>
+              <td style="text-align: right;">{{ i.share_price }}</td>
+            </tr>
+            <tr>
+              <td height="1px" colspan="2" bgcolor="#aeaeae"></td>
+            </tr>
+            <tr>
+              <td>Total </td>
+              <td style="text-align: right;">{{ i.total }}</td>
+            </tr>
+          </tbody>
+        </table>
+        <td>
+          <form accept-charset="UTF-8" action="/sell_items/{{ i.id }}" method='POST' style="float: right;">
+            <table><tr><td>
+              <input class="qnt_to_cart2" id="sell_quentity" name="sell_quentity" required="required" type="number" min="1" max="{{i.share_quntity}}">
+            </td>
+            <td>
+              <input type="text" id='sell_price' name="sell_price" placeholder="Sell price">
+            </td>
+          <td>
+            <input type="date" id='sell_date' name="sell_date">
+          </td>
+          <td>
+            <button type="submit" class="btn btn-secondary">Sell</button>
+          </td></tr></table>
+          </form>
+        </td>
+      </div>
+
+      {% endfor %}
+    </div>
+  </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</body>
+
+</html>

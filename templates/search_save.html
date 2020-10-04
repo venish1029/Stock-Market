@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <title>Stock Market</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    .column {
+      float: left;
+      width: 50%;
+      padding: 10px;
+      height: 650px;
+      /* Should be removed. Only for demonstration */
+    }
+
+    .row:after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+
+
+
+    table {
+      width: inherit;
+    }
+
+
+    @media screen and (max-width: 600px) {
+      .column {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <h3 style="border: 1px solid black;background-color: aqua;padding: 3px;">Stock Market</h3>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  </nav>
+
+  <div class="row">
+    <div class="column" style="background-color:#aaa;" style="margin-left: 23px;">
+      <h2 style="color: honeydew;">{{ search_data.companyName }}</h2>
+      <hr>
+      <span style="margin-top:30px;"><strong
+          style="font-size: 36px;margin-left: 3px;">{{ search_data.currentValue }}</strong><strong> </strong>
+        <strong style="font-size: 26px;margin-left: 3px;">{{ search_data.change }}</strong><strong
+          style="font-size: 20px;margin-left: 3px;">{{ search_data.pChange }}</strong>%</span>
+
+      <table style="width: 100%;margin-bottom: 30px;">
+        <tbody style="border-collapse: collapse; border: 1px solid black;background-color: white;">
+          <tr>
+            <td>Previous Close</td>
+            <td style="text-align: right;">{{ search_data.previousClose }}</td>
+          </tr>
+          <tr>
+            <td height="1px" colspan="2" bgcolor="#aeaeae"></td>
+          </tr>
+          <tr>
+            <td>Previous Open</td>
+            <td style="text-align: right;">{{ search_data.previousOpen }}</td>
+          </tr>
+          <tr>
+            <td height="1px" colspan="2" bgcolor="#aeaeae"></td>
+          </tr>
+          <tr>
+            <td>VWAP</td>
+            <td style="text-align: right;">{{ search_data.weightedAvgPrice }}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <table style="width: 100%;margin-bottom: 30px;">
+        <tbody style="border-collapse: collapse; border: 1px solid black;background-color: white;">
+          <tr>
+            <td>DayHigh</td>
+            <td style="text-align: right;">{{ search_data.dayHigh }}</td>
+          </tr>
+          <tr>
+            <td height="1px" colspan="2" bgcolor="#aeaeae"></td>
+          </tr>
+          <tr>
+            <td>DayLow</td>
+            <td style="text-align: right;">{{ search_data.dayLow }}</td>
+          </tr>
+          <tr>
+            <td height="1px" colspan="2" bgcolor="#aeaeae"></td>
+          </tr>
+          <tr>
+            <td>52week High</td>
+            <td style="text-align: right;">{{ search_data.52weekHigh }}</td>
+          </tr>
+          <tr>
+            <td height="1px" colspan="2" bgcolor="#aeaeae"></td>
+          </tr>
+          <tr>
+            <td>52week Low</td>
+            <td style="text-align: right;">{{ search_data.52weekLow }}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <table style="width: 100%;margin-bottom: 30px;">
+        <tbody style="border-collapse: collapse; border: 1px solid black;background-color: white;">
+          <tr>
+            <td>industry</td>
+            <td style="text-align: right;">{{ search_data.industry }}</td>
+          </tr>
+          <tr>
+            <td height="1px" colspan="2" bgcolor="#aeaeae"></td>
+          </tr>
+          <tr>
+            <td>securityID</td>
+            <td style="text-align: right;">{{ search_data.securityID }}</td>
+          </tr>
+          <tr>
+            <td height="1px" colspan="2" bgcolor="#aeaeae"></td>
+          </tr>
+          <tr>
+            <td>scripCode</td>
+            <td style="text-align: right;">{{ search_data.scripCode }}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <table style="width: 100%;margin-bottom: 30px;">
+        <tbody style="border-collapse: collapse; border: 1px solid black;background-color: white;">
+          <tr>
+            <td>TotalTradedValue</td>
+            <td style="text-align: right;">{{ search_data.totalTradedValue }}</td>
+          </tr>
+          <tr>
+            <td height="1px" colspan="2" bgcolor="#aeaeae"></td>
+          </tr>
+          <tr>
+            <td>TotalTradedQuantity</td>
+            <td style="text-align: right;">{{ search_data.totalTradedQuantity }}</td>
+          </tr>
+          <tr>
+            <td height="1px" colspan="2" bgcolor="#aeaeae"></td>
+          </tr>
+          <tr>
+            <td>MarketCapFull</td>
+            <td style="text-align: right;">{{ search_data.marketCapFull }}</td>
+          </tr>
+          <tr>
+            <td height="1px" colspan="2" bgcolor="#aeaeae"></td>
+          </tr>
+          <tr>
+            <td>MarketCapFreeFloat</td>
+            <td style="text-align: right;">{{ search_data.marketCapFreeFloat }}</td>
+          </tr>
+          <tr>
+            <td height="1px" colspan="2" bgcolor="#aeaeae"></td>
+          </tr>
+          <tr>
+            <td>LAst Update</td>
+            <td style="text-align: right;">{{ search_data.updatedOn }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="column" style="background-color:aqua;">
+      <h2 style="color: honeydew;">{{ search_data.companyName }}</h2>
+      <hr>
+      <form action="/save_details/{{ search_data.scripCode }}/" method="POST" enctype="multipart/form-data">
+        <div class="form-group">
+          <label for="exampleInputEmail1">No Of Quntity</label>
+          <input type="tel" class="form-control" id="no_of_quantity" name="no_of_quantity" aria-describedby="emailHelp"
+            placeholder="No of Quntity">
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">Price of Share</label>
+          <input type="text" value="{{ search_data.currentValue }}" class="form-control" id="price_of_share"
+            name='price_of_share'>
+        </div>
+        <label for="party">Choose your preferred party date:
+          <input type="date" name="select_date">
+        </label>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+
+      {% if company_data %}
+      <div class="container" style="margin-top: 50px;">
+        <table class="table">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">Code</th>
+              <th scope="col">No of Quentity</th>
+              <th scope="col">Price</th>
+              <th scope="col">Total Price/th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{{ company_data.code }}</td>
+              <td>{{ company_data.no_of_quntity }}</td>
+              <td>{{ company_data.price }}</td>
+              <td>{{ company_data.total }}</td>
+            </tr>
+          </tbody>
+        </table>
+        <a href="/admin_Homepage" style="margin-left: 50%;"><i class="fa fa-check-circle" style="font-size:48px;color:red"></i></a>
+      </div>
+      {% endif %}
+
+    </div>
+  </div>
+
+
+
+</body>
+
+</html>
